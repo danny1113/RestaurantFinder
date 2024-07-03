@@ -40,8 +40,8 @@ final class ViewController: UIViewController {
     @IBAction private func searchButtonTapped(_ sender: UIButton) {
         Task {
             await loadRestaurants()
-            showResultTableViewController()
             showAnnotations()
+            showResultTableViewController()
         }
     }
 }
@@ -74,7 +74,12 @@ extension ViewController {
         navigationViewController.title = "近くのレストラン"
         
         if let sheet = navigationViewController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
+            sheet.detents = [
+                .custom(identifier: .init(rawValue: "small"), resolver: { _ in 44 }),
+                .medium(),
+                .large(),
+            ]
+            sheet.selectedDetentIdentifier = .medium
             sheet.prefersGrabberVisible = true
             sheet.largestUndimmedDetentIdentifier = .large
             sheet.prefersScrollingExpandsWhenScrolledToEdge = true
@@ -86,7 +91,16 @@ extension ViewController {
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if animated == false,
+           let sheet = resultTableViewController?.sheetPresentationController {
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = .init(rawValue: "small")
+            }
+        }
         
+        for annotation in mapView.selectedAnnotations {
+            mapView.deselectAnnotation(annotation, animated: true)
+        }
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -101,8 +115,17 @@ extension ViewController: MKMapViewDelegate {
                 return
             }
             
+            if let sheet = resultTableViewController.sheetPresentationController,
+               sheet.selectedDetentIdentifier == .init(rawValue: "small") {
+                sheet.animateChanges {
+                    sheet.selectedDetentIdentifier = .medium
+                }
+            }
+            
             let indexPath = IndexPath(row: index, section: 0)
-            resultTableViewController.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+            if let tableView = resultTableViewController.tableView {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+            }
         }
     }
 }
