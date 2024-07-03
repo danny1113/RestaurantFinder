@@ -21,6 +21,7 @@
 		30E4E2DC2C3552FB006E62F0 /* RestaurentResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */; };
 		30E4E2DE2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */; };
 		30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */; };
+		30E4E2E22C3577BF006E62F0 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2E12C3577BF006E62F0 /* RestaurantDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResultTableViewController.swift; sourceTree = "<group>"; };
 		30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResultTableViewCell.swift; sourceTree = "<group>"; };
 		30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
+		30E4E2E12C3577BF006E62F0 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */,
 				30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */,
 				30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */,
+				30E4E2E12C3577BF006E62F0 /* RestaurantDetailViewController.swift */,
 				30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */,
 				30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */,
 				30E4E2AD2C354249006E62F0 /* Main.storyboard */,
@@ -280,6 +283,7 @@
 				30E4E2DC2C3552FB006E62F0 /* RestaurentResultTableViewController.swift in Sources */,
 				30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */,
 				30E4E2A82C354249006E62F0 /* AppDelegate.swift in Sources */,
+				30E4E2E22C3577BF006E62F0 /* RestaurantDetailViewController.swift in Sources */,
 				30E4E2AA2C354249006E62F0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
