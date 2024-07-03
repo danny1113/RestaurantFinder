@@ -20,7 +20,7 @@
 		30E4E2DA2C354A97006E62F0 /* RestaurentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */; };
 		30E4E2DC2C3552FB006E62F0 /* RestaurentResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */; };
 		30E4E2DE2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */; };
-		30E4E2E02C3562A4006E62F0 /* RestaurentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DF2C3562A4006E62F0 /* RestaurentAnnotation.swift */; };
+		30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 		30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResponse.swift; sourceTree = "<group>"; };
 		30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResultTableViewController.swift; sourceTree = "<group>"; };
 		30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResultTableViewCell.swift; sourceTree = "<group>"; };
-		30E4E2DF2C3562A4006E62F0 /* RestaurentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentAnnotation.swift; sourceTree = "<group>"; };
+		30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 				30E4E2A72C354249006E62F0 /* AppDelegate.swift */,
 				30E4E2A92C354249006E62F0 /* SceneDelegate.swift */,
 				30E4E2AB2C354249006E62F0 /* ViewController.swift */,
-				30E4E2DF2C3562A4006E62F0 /* RestaurentAnnotation.swift */,
+				30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */,
 				30E4E2DB2C3552FB006E62F0 /* RestaurentResultTableViewController.swift */,
 				30E4E2DD2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift */,
 				30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */,
@@ -278,7 +278,7 @@
 				30E4E2DE2C3556DE006E62F0 /* RestaurentResultTableViewCell.swift in Sources */,
 				30E4E2DA2C354A97006E62F0 /* RestaurentResponse.swift in Sources */,
 				30E4E2DC2C3552FB006E62F0 /* RestaurentResultTableViewController.swift in Sources */,
-				30E4E2E02C3562A4006E62F0 /* RestaurentAnnotation.swift in Sources */,
+				30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */,
 				30E4E2A82C354249006E62F0 /* AppDelegate.swift in Sources */,
 				30E4E2AA2C354249006E62F0 /* SceneDelegate.swift in Sources */,
 			);

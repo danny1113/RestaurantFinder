@@ -25,7 +25,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.register(RestaurentAnnotation.self, forAnnotationViewWithReuseIdentifier: Self.annotationIdentifier)
+        mapView.register(RestaurantAnnotation.self, forAnnotationViewWithReuseIdentifier: Self.annotationIdentifier)
         mapView.delegate = self
         mapView.showsUserLocation = true
         
@@ -59,7 +59,7 @@ extension ViewController {
     }
     
     private func showAnnotations() {
-        let annotations = shops.map(RestaurentAnnotation.init)
+        let annotations = shops.map(RestaurantAnnotation.init)
         self.mapView.showAnnotations(annotations, animated: true)
     }
     
@@ -103,7 +103,7 @@ extension ViewController: CLLocationManagerDelegate {
 extension ViewController: RestaurantResultTableViewDelegate {
     func didSelect(shop: RestaurantResponse.Result.Shop) {
         for annotation in mapView.annotations {
-            guard let annotation = annotation as? RestaurentAnnotation else {
+            guard let annotation = annotation as? RestaurantAnnotation else {
                 continue
             }
             if annotation.shop == shop {

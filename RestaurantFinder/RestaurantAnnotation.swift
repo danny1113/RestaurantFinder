@@ -7,7 +7,7 @@
 
 import MapKit
 
-class RestaurentAnnotation: MKPointAnnotation {
+class RestaurantAnnotation: MKPointAnnotation {
     let shop: RestaurantResponse.Result.Shop
     
     init(shop: RestaurantResponse.Result.Shop) {
