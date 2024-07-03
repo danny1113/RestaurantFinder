@@ -16,6 +16,7 @@ final class RestaurentResultTableViewController: UITableViewController {
     
     var shops: [RestaurantResponse.Result.Shop] = []
     
+    private let imageCacheManager = ImageCacheManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,25 +37,26 @@ final class RestaurentResultTableViewController: UITableViewController {
         let shop = shops[indexPath.row]
         cell.shop = shop
         
-        var content = cell.defaultContentConfiguration()
-        content.text = shop.name
-        
-        cell.contentConfiguration = content
+        imageCacheManager.getImage(for: shop.logoImage) { image in
+            var content = cell.defaultContentConfiguration()
+            content.text = shop.name
+            content.image = image
+            cell.contentConfiguration = content
+        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shop = shops[indexPath.row]
-        print(shop)
         tableView.deselectRow(at: indexPath, animated: true)
-        if let sheet = sheetPresentationController,
-           sheet.selectedDetentIdentifier != .medium {
-            sheet.animateChanges {
-                sheet.selectedDetentIdentifier = .medium
-            }
-        }
         delegate?.didSelect(shop: shop)
+        pushDetailView(with: shop)
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let shop = shops[indexPath.row]
+        imageCacheManager.cancel(for: shop.logoImage)
     }
     
     /*
@@ -67,6 +69,31 @@ final class RestaurentResultTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension RestaurentResultTableViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let shop = shops[indexPath.row]
+            imageCacheManager.getImage(for: shop.logoImage) { _ in }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let shop = shops[indexPath.row]
+            imageCacheManager.cancel(for: shop.logoImage)
+        }
+    }
+}
+
+extension RestaurentResultTableViewController {
+    func pushDetailView(with shop: RestaurantResponse.Result.Shop) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController
+        detailViewController.shop = shop
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 protocol RestaurantResultTableViewDelegate: AnyObject {
