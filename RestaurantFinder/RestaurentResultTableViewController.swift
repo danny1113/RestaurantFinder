@@ -20,7 +20,12 @@ final class RestaurentResultTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         tableView.register(RestaurentResultTableViewCell.self, forCellReuseIdentifier: Self.identifier)
     }
     
@@ -84,6 +89,12 @@ extension RestaurentResultTableViewController: UITableViewDataSourcePrefetching 
             let shop = shops[indexPath.row]
             imageCacheManager.cancel(for: shop.logoImage)
         }
+    }
+}
+
+extension RestaurentResultTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
     }
 }
 

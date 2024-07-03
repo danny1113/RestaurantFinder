@@ -81,6 +81,7 @@ extension ViewController {
             ]
             sheet.selectedDetentIdentifier = .medium
             sheet.prefersGrabberVisible = true
+            sheet.prefersEdgeAttachedInCompactHeight = true
             sheet.largestUndimmedDetentIdentifier = .large
             sheet.prefersScrollingExpandsWhenScrolledToEdge = true
         }
