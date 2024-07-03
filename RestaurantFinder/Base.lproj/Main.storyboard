@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcF-yB-48G">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcF-yB-48G">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q3-VE-dPz">
@@ -59,7 +58,11 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Q3-VE-dPz" secondAttribute="trailing" constant="16" id="BPz-WX-VLz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Q3-VE-dPz" secondAttribute="bottom" id="LUb-od-lJc"/>
+                            <constraint firstItem="BcF-yB-48G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mng-V8-uS4"/>
+                            <constraint firstItem="BcF-yB-48G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yzd-dQ-nKT"/>
                             <constraint firstItem="0Q3-VE-dPz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="onz-j7-Kkq"/>
+                            <constraint firstAttribute="bottom" secondItem="BcF-yB-48G" secondAttribute="bottom" id="qT8-8Q-28p"/>
+                            <constraint firstItem="BcF-yB-48G" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="uXu-nQ-miU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RestaurantFinder" largeTitleDisplayMode="never" id="jWR-77-S5Q"/>
