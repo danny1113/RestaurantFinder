@@ -12,6 +12,8 @@ final class RestaurentResultTableViewController: UITableViewController {
     
     static let identifier = "cell"
     
+    weak var delegate: RestaurantResultTableViewDelegate?
+    
     var shops: [RestaurantResponse.Result.Shop] = []
     
     
@@ -45,10 +47,8 @@ final class RestaurentResultTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shop = shops[indexPath.row]
         print(shop)
-        if let sheet = sheetPresentationController {
-            sheet.selectedDetentIdentifier = .large
-        }
         tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didSelect(shop: shop)
     }
     
     /*
@@ -61,4 +61,8 @@ final class RestaurentResultTableViewController: UITableViewController {
     }
     */
 
+}
+
+protocol RestaurantResultTableViewDelegate: AnyObject {
+    func didSelect(shop: RestaurantResponse.Result.Shop)
 }

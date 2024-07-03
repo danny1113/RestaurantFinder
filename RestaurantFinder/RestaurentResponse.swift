@@ -26,7 +26,7 @@ struct RestaurantResponse: Decodable {
             case shops = "shop"
         }
         
-        struct Shop: Decodable, Identifiable {
+        struct Shop: Decodable, Identifiable, Equatable {
             let id: String
             let name: String
             let logoImage: URL
@@ -52,6 +52,10 @@ struct RestaurantResponse: Decodable {
                 case latitude = "lat"
                 case longitude = "lng"
                 case access = "mobile_access"
+            }
+            
+            static func == (lhs: Self, rhs: Self) -> Bool {
+                return lhs.id == rhs.id
             }
         }
     }
