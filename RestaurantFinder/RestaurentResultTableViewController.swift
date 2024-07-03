@@ -48,6 +48,12 @@ final class RestaurentResultTableViewController: UITableViewController {
         let shop = shops[indexPath.row]
         print(shop)
         tableView.deselectRow(at: indexPath, animated: true)
+        if let sheet = sheetPresentationController,
+           sheet.selectedDetentIdentifier != .medium {
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = .medium
+            }
+        }
         delegate?.didSelect(shop: shop)
     }
     

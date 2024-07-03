@@ -92,6 +92,19 @@ extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
+        if let annotation = annotation as? RestaurantAnnotation {
+            guard let resultTableViewController,
+                  let index = shops.firstIndex(of: annotation.shop)
+            else {
+                return
+            }
+            
+            let indexPath = IndexPath(row: index, section: 0)
+            resultTableViewController.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        }
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
