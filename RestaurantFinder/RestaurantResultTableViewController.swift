@@ -146,6 +146,7 @@ extension RestaurantResultTableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController
         detailViewController.shop = shop
+        detailViewController.imageCacheManager = imageCacheManager
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     

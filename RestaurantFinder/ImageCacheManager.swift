@@ -13,7 +13,7 @@ final class ImageCacheManager {
     private var cachedImages: [URL: UIImage] = [:]
     private var imageTasks: [URL: Task<Void, Never>] = [:]
     
-    private func getImage(for url: URL) async throws -> UIImage? {
+    func getImage(for url: URL) async throws -> UIImage? {
         if let cachedImage = cachedImages[url] {
             return cachedImage
         }
