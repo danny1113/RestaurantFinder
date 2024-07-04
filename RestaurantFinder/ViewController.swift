@@ -16,6 +16,7 @@ final class ViewController: UIViewController {
     @IBOutlet private var searchRadiusSlider: UISlider!
     @IBOutlet private var searchRadiusLabel: UILabel!
     @IBOutlet private var searchButton: UIButton!
+    @IBOutlet private var locationButton: UIButton!
     
     private var shops = [RestaurantResponse.Result.Shop]()
     
@@ -28,22 +29,25 @@ final class ViewController: UIViewController {
         
         mapView.register(RestaurantAnnotation.self, forAnnotationViewWithReuseIdentifier: Self.annotationIdentifier)
         mapView.delegate = self
-        mapView.showsUserLocation = true
         
         locationManager.delegate = self
-        /*
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestWhenInUseAuthorization()
-        }
-         */
     }
     
     @IBAction private func searchButtonTapped(_ sender: UIButton) {
         Task {
-            await loadRestaurants()
+            let coordinate = mapView.centerCoordinate
+            await loadRestaurants(with: coordinate)
             showAnnotations()
             showResultTableViewController()
         }
+    }
+    
+    @IBAction private func locationButtonTapped() {
+        guard let coordinate = locationManager.location?.coordinate else {
+            print("can't not get location coordinate")
+            return
+        }
+        mapView.setCenter(coordinate, animated: true)
     }
     
     @IBAction private func searchRadiusSliderValueChanged(_ sender: UISlider) {
@@ -61,9 +65,8 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController {
-    private func loadRestaurants() async {
+    private func loadRestaurants(with coordinate: CLLocationCoordinate2D) async {
         do {
-            let coordinate = CLLocationCoordinate2D(latitude: 34.67, longitude: 135.52)
             let restaurants = try await RestaurantAPIService.getNearbyRestaurants(
                 with: coordinate,
                 range: Int(searchRadiusSlider.value)
@@ -149,8 +152,17 @@ extension ViewController: MKMapViewDelegate {
 }
 
 extension ViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            break
+        case .authorizedWhenInUse, .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
     }
 }
 
