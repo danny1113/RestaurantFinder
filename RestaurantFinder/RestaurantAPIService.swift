@@ -10,7 +10,8 @@ import CoreLocation
 
 struct RestaurantAPIService {
     static func getNearbyRestaurants(
-        with coordinate: CLLocationCoordinate2D
+        with coordinate: CLLocationCoordinate2D,
+        range: Int
     ) async throws -> RestaurantResponse.Result {
         let baseUrl = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
         var url = URL(string: baseUrl)!
@@ -19,6 +20,8 @@ struct RestaurantAPIService {
             URLQueryItem(name: "key", value: Secrets.apiKey),
             URLQueryItem(name: "lat", value: "\(coordinate.latitude)"),
             URLQueryItem(name: "lng", value: "\(coordinate.longitude)"),
+            URLQueryItem(name: "range", value: "\(range)"),
+            URLQueryItem(name: "count", value: "100"),
         ])
         
         let (data, _) = try await URLSession.shared.data(from: url)

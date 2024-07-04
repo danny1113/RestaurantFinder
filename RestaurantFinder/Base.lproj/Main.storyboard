@@ -22,29 +22,47 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q3-VE-dPz">
-                                <rect key="frame" x="16" y="783.66666666666663" width="361" height="34.333333333333371"/>
+                                <rect key="frame" x="16" y="756" width="361" height="62"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="m7R-1x-Vwc">
-                                        <rect key="frame" x="18.000000000000014" y="0.0" width="255.33333333333337" height="35.333333333333336"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="m7R-1x-Vwc">
+                                        <rect key="frame" x="78.000000000000014" y="16" width="191.33333333333337" height="31"/>
+                                        <connections>
+                                            <action selector="searchRadiusSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="CqG-zD-hLW"/>
+                                        </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9I-GD-Yfm">
-                                        <rect key="frame" x="279.33333333333331" y="0.0" width="81.666666666666686" height="34.333333333333336"/>
+                                        <rect key="frame" x="275.33333333333331" y="14" width="81.666666666666686" height="34"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" title="検索"/>
                                         <connections>
                                             <action selector="searchButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fC2-O7-Ks0"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索半径" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDu-73-hLP">
+                                        <rect key="frame" x="8" y="8" width="64" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvi-mN-MUN">
+                                        <rect key="frame" x="7.9999999999999964" y="33" width="52.666666666666657" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="j9I-GD-Yfm" firstAttribute="leading" secondItem="m7R-1x-Vwc" secondAttribute="trailing" constant="8" symbolic="YES" id="CrQ-hw-DjA"/>
-                                    <constraint firstAttribute="bottom" secondItem="m7R-1x-Vwc" secondAttribute="bottom" id="E4J-g7-3z2"/>
-                                    <constraint firstItem="j9I-GD-Yfm" firstAttribute="top" secondItem="0Q3-VE-dPz" secondAttribute="top" id="Jfd-hd-8Ou"/>
-                                    <constraint firstAttribute="trailing" secondItem="j9I-GD-Yfm" secondAttribute="trailing" id="LOR-A3-uxa"/>
-                                    <constraint firstItem="m7R-1x-Vwc" firstAttribute="leading" secondItem="0Q3-VE-dPz" secondAttribute="leading" constant="20" symbolic="YES" id="ZHQ-Zq-ufI"/>
-                                    <constraint firstItem="m7R-1x-Vwc" firstAttribute="top" secondItem="0Q3-VE-dPz" secondAttribute="top" id="hy7-gP-Pve"/>
-                                    <constraint firstAttribute="bottom" secondItem="j9I-GD-Yfm" secondAttribute="bottom" id="zHg-GS-Skg"/>
+                                    <constraint firstItem="m7R-1x-Vwc" firstAttribute="centerY" secondItem="0Q3-VE-dPz" secondAttribute="centerY" id="1Fh-zi-c5w"/>
+                                    <constraint firstItem="vvi-mN-MUN" firstAttribute="leading" secondItem="0Q3-VE-dPz" secondAttribute="leading" constant="8" id="1eV-x7-S2c"/>
+                                    <constraint firstItem="j9I-GD-Yfm" firstAttribute="leading" secondItem="m7R-1x-Vwc" secondAttribute="trailing" constant="8" symbolic="YES" id="DEH-Lz-2sO"/>
+                                    <constraint firstItem="m7R-1x-Vwc" firstAttribute="leading" secondItem="cDu-73-hLP" secondAttribute="trailing" constant="8" symbolic="YES" id="GR3-tJ-YXi"/>
+                                    <constraint firstItem="vvi-mN-MUN" firstAttribute="top" secondItem="cDu-73-hLP" secondAttribute="bottom" constant="4" id="L4v-nk-FI6"/>
+                                    <constraint firstItem="cDu-73-hLP" firstAttribute="leading" secondItem="0Q3-VE-dPz" secondAttribute="leading" constant="8" id="OpC-kE-HdE"/>
+                                    <constraint firstItem="j9I-GD-Yfm" firstAttribute="centerY" secondItem="0Q3-VE-dPz" secondAttribute="centerY" id="YAm-I5-Gtb"/>
+                                    <constraint firstAttribute="trailing" secondItem="j9I-GD-Yfm" secondAttribute="trailing" constant="4" id="gg3-ML-tEd"/>
+                                    <constraint firstAttribute="bottom" secondItem="vvi-mN-MUN" secondAttribute="bottom" constant="8" id="kIC-wt-Y6z"/>
+                                    <constraint firstItem="cDu-73-hLP" firstAttribute="top" secondItem="0Q3-VE-dPz" secondAttribute="top" constant="8" id="yib-Ia-JD9"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -56,12 +74,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Q3-VE-dPz" secondAttribute="trailing" constant="16" id="BPz-WX-VLz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Q3-VE-dPz" secondAttribute="bottom" id="LUb-od-lJc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Q3-VE-dPz" secondAttribute="trailing" constant="16" id="Aob-uB-qB0"/>
+                            <constraint firstItem="0Q3-VE-dPz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="C1a-64-lPU"/>
                             <constraint firstItem="BcF-yB-48G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mng-V8-uS4"/>
                             <constraint firstItem="BcF-yB-48G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yzd-dQ-nKT"/>
-                            <constraint firstItem="0Q3-VE-dPz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="onz-j7-Kkq"/>
                             <constraint firstAttribute="bottom" secondItem="BcF-yB-48G" secondAttribute="bottom" id="qT8-8Q-28p"/>
+                            <constraint firstItem="0Q3-VE-dPz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qgg-1t-tYG"/>
                             <constraint firstItem="BcF-yB-48G" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="uXu-nQ-miU"/>
                         </constraints>
                     </view>
@@ -69,6 +87,7 @@
                     <connections>
                         <outlet property="mapView" destination="BcF-yB-48G" id="vkj-1A-ktx"/>
                         <outlet property="searchButton" destination="j9I-GD-Yfm" id="Bq8-pE-uha"/>
+                        <outlet property="searchRadiusLabel" destination="vvi-mN-MUN" id="Ue7-FO-WKl"/>
                         <outlet property="searchRadiusSlider" destination="m7R-1x-Vwc" id="fn8-UZ-1F6"/>
                     </connections>
                 </viewController>

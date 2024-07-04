@@ -14,6 +14,7 @@ final class ViewController: UIViewController {
     
     @IBOutlet private var mapView: MKMapView!
     @IBOutlet private var searchRadiusSlider: UISlider!
+    @IBOutlet private var searchRadiusLabel: UILabel!
     @IBOutlet private var searchButton: UIButton!
     
     private var shops = [RestaurantResponse.Result.Shop]()
@@ -44,13 +45,29 @@ final class ViewController: UIViewController {
             showResultTableViewController()
         }
     }
+    
+    @IBAction private func searchRadiusSliderValueChanged(_ sender: UISlider) {
+        let text = switch Int(sender.value) {
+        case 1: "300m"
+        case 2: "500m"
+        case 3: "1000m"
+        case 4: "2000m"
+        case 5: "3000m"
+        default:
+            "1000m"
+        }
+        searchRadiusLabel.text = text
+    }
 }
 
 extension ViewController {
     private func loadRestaurants() async {
         do {
             let coordinate = CLLocationCoordinate2D(latitude: 34.67, longitude: 135.52)
-            let restaurants = try await RestaurantAPIService.getNearbyRestaurants(with: coordinate)
+            let restaurants = try await RestaurantAPIService.getNearbyRestaurants(
+                with: coordinate,
+                range: Int(searchRadiusSlider.value)
+            )
             let shops = restaurants.shops
             self.shops = shops
         } catch {
