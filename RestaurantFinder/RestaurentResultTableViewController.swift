@@ -45,7 +45,11 @@ final class RestaurentResultTableViewController: UITableViewController {
         imageCacheManager.getImage(for: shop.logoImage) { image in
             var content = cell.defaultContentConfiguration()
             content.text = shop.name
+            content.secondaryText = shop.access
             content.image = image
+            let size = CGSize(width: 60, height: 60)
+            content.imageProperties.maximumSize = size
+            content.imageProperties.reservedLayoutSize = size
             cell.contentConfiguration = content
         }
         
