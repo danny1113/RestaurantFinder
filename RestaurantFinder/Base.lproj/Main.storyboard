@@ -60,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="1034.3511450381679" y="3.5211267605633805"/>
         </scene>
-        <!--Restaurent Result Table View Controller-->
+        <!--Restaurant Result Table View Controller-->
         <scene sceneID="snU-Sw-iaf">
             <objects>
-                <viewController storyboardIdentifier="ResultTableView" id="rtA-Nd-OaR" customClass="RestaurentResultTableViewController" customModule="RestaurantFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultTableView" id="rtA-Nd-OaR" customClass="RestaurantResultTableViewController" customModule="RestaurantFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qO9-0X-oTO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  RestaurentResultTableViewCell.swift
+//  RestaurantResultTableViewCell.swift
 //  RestaurantFinder
 //
 //  Created by 龐達業 on 2024/7/3.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurentResultTableViewCell: UITableViewCell {
+class RestaurantResultTableViewCell: UITableViewCell {
     
     var shop: RestaurantResponse.Result.Shop!
     

@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
     
     private var shops = [RestaurantResponse.Result.Shop]()
     
-    private var resultTableViewController: RestaurentResultTableViewController?
+    private var resultTableViewController: RestaurantResultTableViewController?
     
     private var locationManager = CLLocationManager()
     
@@ -70,7 +70,7 @@ extension ViewController {
     
     private func showResultTableViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tableViewController = storyboard.instantiateViewController(withIdentifier: "ResultTableView") as! RestaurentResultTableViewController
+        let tableViewController = storyboard.instantiateViewController(withIdentifier: "ResultTableView") as! RestaurantResultTableViewController
         tableViewController.delegate = self
         self.resultTableViewController = tableViewController
         

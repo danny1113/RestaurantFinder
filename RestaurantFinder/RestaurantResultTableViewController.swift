@@ -1,5 +1,5 @@
 //
-//  RestaurentResultTableViewController.swift
+//  RestaurantResultTableViewController.swift
 //  RestaurantFinder
 //
 //  Created by 龐達業 on 2024/7/3.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-final class RestaurentResultTableViewController: UIViewController {
+final class RestaurantResultTableViewController: UIViewController {
     
     static let identifier = "cell"
     
@@ -33,7 +33,7 @@ final class RestaurentResultTableViewController: UIViewController {
             sheet.invalidateDetents()
         }
         
-        tableView.register(RestaurentResultTableViewCell.self, forCellReuseIdentifier: Self.identifier)
+        tableView.register(RestaurantResultTableViewCell.self, forCellReuseIdentifier: Self.identifier)
     }
     
     @IBAction private func searchButtonTapped() {
@@ -55,7 +55,7 @@ final class RestaurentResultTableViewController: UIViewController {
     }
 }
 
-extension RestaurentResultTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension RestaurantResultTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filteredShops.count
     }
@@ -66,7 +66,7 @@ extension RestaurentResultTableViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.identifier, for: indexPath)
-        guard let cell = cell as? RestaurentResultTableViewCell else {
+        guard let cell = cell as? RestaurantResultTableViewCell else {
             return cell
         }
         
@@ -103,7 +103,7 @@ extension RestaurentResultTableViewController: UITableViewDelegate, UITableViewD
     }
 }
 
-extension RestaurentResultTableViewController: UITableViewDataSourcePrefetching {
+extension RestaurantResultTableViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             let shop = filteredShops[indexPath.row]
@@ -119,7 +119,7 @@ extension RestaurentResultTableViewController: UITableViewDataSourcePrefetching 
     }
 }
 
-extension RestaurentResultTableViewController: UISearchBarDelegate {
+extension RestaurantResultTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filteredShops = shops
@@ -133,7 +133,7 @@ extension RestaurentResultTableViewController: UISearchBarDelegate {
     }
 }
 
-extension RestaurentResultTableViewController {
+extension RestaurantResultTableViewController {
     func calculateDetentHeight() -> CGFloat? {
         guard let headerView = headerView,
               let searchBar = searchBar else {
