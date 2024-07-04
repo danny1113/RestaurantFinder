@@ -17,6 +17,8 @@ final class RestaurantResultTableViewController: UIViewController {
     @IBOutlet private var searchBar: UISearchBar!
     @IBOutlet private var searchRadiusSlider: UISlider!
     @IBOutlet private var searchRadiusLabel: UILabel!
+    @IBOutlet private var searchButton: UIButton!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     
     weak var delegate: RestaurantResultTableViewDelegate?
     
@@ -37,8 +39,16 @@ final class RestaurantResultTableViewController: UIViewController {
     }
     
     @IBAction private func searchButtonTapped() {
-        let range = Int(searchRadiusSlider.value)
-        delegate?.searchButtonDidTap(range: range)
+        Task {
+            searchButton.isHidden = true
+            activityIndicator.startAnimating()
+            
+            let range = Int(searchRadiusSlider.value)
+            await delegate?.searchButtonDidTap(range: range)
+            
+            activityIndicator.stopAnimating()
+            searchButton.isHidden = false
+        }
     }
     
     @IBAction private func searchRadiusSliderValueChanged(_ sender: UISlider) {
@@ -171,5 +181,5 @@ extension RestaurantResultTableViewController {
 
 protocol RestaurantResultTableViewDelegate: AnyObject {
     func didSelect(shop: RestaurantResponse.Result.Shop)
-    func searchButtonDidTap(range: Int)
+    func searchButtonDidTap(range: Int) async
 }

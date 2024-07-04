@@ -115,6 +115,9 @@
                                             <action selector="searchButtonTapped" destination="rtA-Nd-OaR" eventType="touchUpInside" id="hAN-1S-xKh"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aVn-1K-LSR">
+                                        <rect key="frame" x="338.33333333333331" y="21" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索半径" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3K-uM-0mR">
                                         <rect key="frame" x="8" y="8" width="64" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -131,6 +134,8 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="QB9-DH-hca" secondAttribute="bottom" constant="8" id="2aq-ht-YIU"/>
+                                    <constraint firstItem="aVn-1K-LSR" firstAttribute="centerX" secondItem="Y9J-h9-igv" secondAttribute="centerX" id="3fW-ZS-vjc"/>
+                                    <constraint firstItem="aVn-1K-LSR" firstAttribute="centerY" secondItem="R9q-hb-XL8" secondAttribute="centerY" id="5co-oB-H3S"/>
                                     <constraint firstItem="C3K-uM-0mR" firstAttribute="top" secondItem="R9q-hb-XL8" secondAttribute="top" constant="8" id="8hj-8M-HAH"/>
                                     <constraint firstItem="QB9-DH-hca" firstAttribute="top" secondItem="C3K-uM-0mR" secondAttribute="bottom" constant="4" id="Gsm-2D-o9h"/>
                                     <constraint firstItem="F4k-iv-Kei" firstAttribute="centerY" secondItem="R9q-hb-XL8" secondAttribute="centerY" id="ShK-aM-17S"/>
@@ -162,8 +167,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="aVn-1K-LSR" id="OEn-ad-fjZ"/>
                         <outlet property="headerView" destination="R9q-hb-XL8" id="bml-o7-3qh"/>
                         <outlet property="searchBar" destination="fbx-Zi-wSD" id="tb8-C9-4e9"/>
+                        <outlet property="searchButton" destination="Y9J-h9-igv" id="6iw-B7-Nsg"/>
                         <outlet property="searchRadiusLabel" destination="QB9-DH-hca" id="fCv-j9-65B"/>
                         <outlet property="searchRadiusSlider" destination="F4k-iv-Kei" id="qeu-kS-vO0"/>
                         <outlet property="tableView" destination="Ddg-BC-naM" id="TTz-4t-Cab"/>
@@ -188,9 +195,14 @@
                                     <constraint firstAttribute="height" constant="120" id="XHm-jH-4i8"/>
                                     <constraint firstAttribute="width" secondItem="MzM-xa-QHA" secondAttribute="height" multiplier="1:1" id="x1q-e3-pMX"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nw8-uf-88y">
-                                <rect key="frame" x="144" y="59.000000000000007" width="233" height="26.333333333333336"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nw8-uf-88y">
+                                <rect key="frame" x="144" y="59" width="233" height="120"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -202,6 +214,7 @@
                             <constraint firstItem="WET-qf-Ptu" firstAttribute="trailing" secondItem="Nw8-uf-88y" secondAttribute="trailing" constant="16" id="1Vp-md-lNt"/>
                             <constraint firstItem="Nw8-uf-88y" firstAttribute="top" secondItem="MzM-xa-QHA" secondAttribute="top" id="VxW-gt-Nwz"/>
                             <constraint firstItem="Nw8-uf-88y" firstAttribute="leading" secondItem="MzM-xa-QHA" secondAttribute="trailing" constant="8" symbolic="YES" id="ama-b1-xdy"/>
+                            <constraint firstItem="Nw8-uf-88y" firstAttribute="bottom" secondItem="MzM-xa-QHA" secondAttribute="bottom" id="bU1-ll-jbH"/>
                             <constraint firstItem="MzM-xa-QHA" firstAttribute="top" secondItem="WET-qf-Ptu" secondAttribute="top" id="nyY-M8-jtO"/>
                             <constraint firstItem="MzM-xa-QHA" firstAttribute="leading" secondItem="WET-qf-Ptu" secondAttribute="leading" constant="16" id="xLk-8M-Sd2"/>
                         </constraints>
@@ -213,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSK-80-Wqr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2705" y="4"/>
+            <point key="canvasLocation" x="2704.5801526717555" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>

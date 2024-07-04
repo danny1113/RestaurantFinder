@@ -173,16 +173,16 @@ extension ViewController: RestaurantResultTableViewDelegate {
         }
     }
     
-    func searchButtonDidTap(range: Int) {
-        Task {
-            let coordinate = mapView.centerCoordinate
-            await loadRestaurants(with: coordinate, range: range)
-            showAnnotations()
-            resultTableViewController?.updateTableView(with: shops)
-            if let sheet = resultTableViewController?.sheetPresentationController {
-                sheet.animateChanges {
-                    sheet.selectedDetentIdentifier = .medium
-                }
+    func searchButtonDidTap(range: Int) async {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        let coordinate = mapView.centerCoordinate
+        await loadRestaurants(with: coordinate, range: range)
+        showAnnotations()
+        resultTableViewController?.updateTableView(with: shops)
+        if let sheet = resultTableViewController?.sheetPresentationController {
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = .medium
             }
         }
     }
