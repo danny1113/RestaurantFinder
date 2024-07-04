@@ -1,5 +1,5 @@
 //
-//  RestaurentAnnotation.swift
+//  RestaurantAnnotation.swift
 //  RestaurantFinder
 //
 //  Created by 龐達業 on 2024/7/3.

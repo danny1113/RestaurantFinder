@@ -17,7 +17,7 @@
 		30E4E2C92C35424B006E62F0 /* RestaurantFinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2C82C35424B006E62F0 /* RestaurantFinderUITests.swift */; };
 		30E4E2CB2C35424B006E62F0 /* RestaurantFinderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2CA2C35424B006E62F0 /* RestaurantFinderUITestsLaunchTests.swift */; };
 		30E4E2D82C3544AE006E62F0 /* RestaurantAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */; };
-		30E4E2DA2C354A97006E62F0 /* RestaurentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */; };
+		30E4E2DA2C354A97006E62F0 /* RestaurantResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2D92C354A97006E62F0 /* RestaurantResponse.swift */; };
 		30E4E2DC2C3552FB006E62F0 /* RestaurantResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DB2C3552FB006E62F0 /* RestaurantResultTableViewController.swift */; };
 		30E4E2DE2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DD2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift */; };
 		30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */; };
@@ -57,7 +57,7 @@
 		30E4E2C82C35424B006E62F0 /* RestaurantFinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFinderUITests.swift; sourceTree = "<group>"; };
 		30E4E2CA2C35424B006E62F0 /* RestaurantFinderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFinderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAPIService.swift; sourceTree = "<group>"; };
-		30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurentResponse.swift; sourceTree = "<group>"; };
+		30E4E2D92C354A97006E62F0 /* RestaurantResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantResponse.swift; sourceTree = "<group>"; };
 		30E4E2DB2C3552FB006E62F0 /* RestaurantResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantResultTableViewController.swift; sourceTree = "<group>"; };
 		30E4E2DD2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantResultTableViewCell.swift; sourceTree = "<group>"; };
 		30E4E2DF2C3562A4006E62F0 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				30E4E2DD2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift */,
 				30E4E2E12C3577BF006E62F0 /* RestaurantDetailViewController.swift */,
 				30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */,
-				30E4E2D92C354A97006E62F0 /* RestaurentResponse.swift */,
+				30E4E2D92C354A97006E62F0 /* RestaurantResponse.swift */,
 				30E4E2E32C35AC69006E62F0 /* ImageCacheManager.swift */,
 				30E4E2AD2C354249006E62F0 /* Main.storyboard */,
 				30E4E2B02C35424A006E62F0 /* Assets.xcassets */,
@@ -283,7 +283,7 @@
 				30E4E2D82C3544AE006E62F0 /* RestaurantAPIService.swift in Sources */,
 				30E4E2E42C35AC69006E62F0 /* ImageCacheManager.swift in Sources */,
 				30E4E2DE2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift in Sources */,
-				30E4E2DA2C354A97006E62F0 /* RestaurentResponse.swift in Sources */,
+				30E4E2DA2C354A97006E62F0 /* RestaurantResponse.swift in Sources */,
 				30E4E2DC2C3552FB006E62F0 /* RestaurantResultTableViewController.swift in Sources */,
 				30E4E2E02C3562A4006E62F0 /* RestaurantAnnotation.swift in Sources */,
 				30E4E2A82C354249006E62F0 /* AppDelegate.swift in Sources */,
