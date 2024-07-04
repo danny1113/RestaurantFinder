@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantResultTableViewCell: UITableViewCell {
+final class RestaurantResultTableViewCell: UITableViewCell {
     
     var shop: RestaurantResponse.Result.Shop!
     

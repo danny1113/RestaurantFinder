@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController {
+final class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
