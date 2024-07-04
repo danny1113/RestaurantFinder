@@ -8,38 +8,69 @@
 import UIKit
 import CoreLocation
 
-final class RestaurentResultTableViewController: UITableViewController {
+final class RestaurentResultTableViewController: UIViewController {
     
     static let identifier = "cell"
     
+    @IBOutlet private var headerView: UIView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var searchBar: UISearchBar!
+    @IBOutlet private var searchRadiusSlider: UISlider!
+    @IBOutlet private var searchRadiusLabel: UILabel!
+    
     weak var delegate: RestaurantResultTableViewDelegate?
     
-    var shops: [RestaurantResponse.Result.Shop] = []
+    private var shops: [RestaurantResponse.Result.Shop] = []
+    private(set) var filteredShops: [RestaurantResponse.Result.Shop] = []
     
     private let imageCacheManager = ImageCacheManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        if let sheet = navigationController?.sheetPresentationController {
+            sheet.invalidateDetents()
+        }
         
         tableView.register(RestaurentResultTableViewCell.self, forCellReuseIdentifier: Self.identifier)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shops.count
+    @IBAction private func searchButtonTapped() {
+        let range = Int(searchRadiusSlider.value)
+        delegate?.searchButtonDidTap(range: range)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @IBAction private func searchRadiusSliderValueChanged(_ sender: UISlider) {
+        let text = switch Int(sender.value) {
+        case 1: "300m"
+        case 2: "500m"
+        case 3: "1000m"
+        case 4: "2000m"
+        case 5: "3000m"
+        default:
+            "1000m"
+        }
+        searchRadiusLabel.text = text
+    }
+}
+
+extension RestaurentResultTableViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        filteredShops.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.identifier, for: indexPath)
         guard let cell = cell as? RestaurentResultTableViewCell else {
             return cell
         }
         
-        let shop = shops[indexPath.row]
+        let shop = filteredShops[indexPath.row]
         cell.shop = shop
         
         imageCacheManager.getImage(for: shop.logoImage) { image in
@@ -56,61 +87,88 @@ final class RestaurentResultTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let shop = shops[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let shop = filteredShops[indexPath.row]
         delegate?.didSelect(shop: shop)
         pushDetailView(with: shop)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let shop = shops[indexPath.row]
-        imageCacheManager.cancel(for: shop.logoImage)
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        if row < filteredShops.count {
+            let shop = filteredShops[row]
+            imageCacheManager.cancel(for: shop.logoImage)
+        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension RestaurentResultTableViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            let shop = shops[indexPath.row]
+            let shop = filteredShops[indexPath.row]
             imageCacheManager.getImage(for: shop.logoImage) { _ in }
         }
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            let shop = shops[indexPath.row]
+            let shop = filteredShops[indexPath.row]
             imageCacheManager.cancel(for: shop.logoImage)
         }
     }
 }
 
-extension RestaurentResultTableViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        // TODO
+extension RestaurentResultTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredShops = shops
+        } else {
+            filteredShops = shops.filter { shop in
+                shop.name.contains(searchText)
+            }
+        }
+        print(filteredShops)
+        tableView.reloadData()
     }
 }
 
 extension RestaurentResultTableViewController {
+    func calculateDetentHeight() -> CGFloat? {
+        guard let headerView = headerView,
+              let searchBar = searchBar else {
+            return nil
+        }
+        return headerView.frame.height + searchBar.frame.height
+    }
+    
     func pushDetailView(with shop: RestaurantResponse.Result.Shop) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController
         detailViewController.shop = shop
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func updateShops(_ shops: [RestaurantResponse.Result.Shop]) {
+        self.shops = shops
+        self.filteredShops = shops
+    }
+    
+    func updateTableView(with shops: [RestaurantResponse.Result.Shop]) {
+        updateShops(shops)
+        tableView.reloadData()
+    }
+    
+    func selectRow(with shop: RestaurantResponse.Result.Shop) {
+        guard let index = filteredShops.firstIndex(of: shop) else {
+            return
+        }
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
 }
 
 protocol RestaurantResultTableViewDelegate: AnyObject {
     func didSelect(shop: RestaurantResponse.Result.Shop)
+    func searchButtonDidTap(range: Int)
 }

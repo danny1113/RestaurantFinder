@@ -13,9 +13,6 @@ final class ViewController: UIViewController {
     static let annotationIdentifier = "restaurant"
     
     @IBOutlet private var mapView: MKMapView!
-    @IBOutlet private var searchRadiusSlider: UISlider!
-    @IBOutlet private var searchRadiusLabel: UILabel!
-    @IBOutlet private var searchButton: UIButton!
     @IBOutlet private var locationButton: UIButton!
     
     private var shops = [RestaurantResponse.Result.Shop]()
@@ -31,15 +28,16 @@ final class ViewController: UIViewController {
         mapView.delegate = self
         
         locationManager.delegate = self
+        
+        if let coordinate = locationManager.location?.coordinate {
+            mapView.setCenter(coordinate, animated: true)
+        }
     }
     
-    @IBAction private func searchButtonTapped(_ sender: UIButton) {
-        Task {
-            let coordinate = mapView.centerCoordinate
-            await loadRestaurants(with: coordinate)
-            showAnnotations()
-            showResultTableViewController()
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showResultTableViewController()
     }
     
     @IBAction private func locationButtonTapped() {
@@ -49,27 +47,14 @@ final class ViewController: UIViewController {
         }
         mapView.setCenter(coordinate, animated: true)
     }
-    
-    @IBAction private func searchRadiusSliderValueChanged(_ sender: UISlider) {
-        let text = switch Int(sender.value) {
-        case 1: "300m"
-        case 2: "500m"
-        case 3: "1000m"
-        case 4: "2000m"
-        case 5: "3000m"
-        default:
-            "1000m"
-        }
-        searchRadiusLabel.text = text
-    }
 }
 
 extension ViewController {
-    private func loadRestaurants(with coordinate: CLLocationCoordinate2D) async {
+    private func loadRestaurants(with coordinate: CLLocationCoordinate2D, range: Int) async {
         do {
             let restaurants = try await RestaurantAPIService.getNearbyRestaurants(
                 with: coordinate,
-                range: Int(searchRadiusSlider.value)
+                range: range
             )
             let shops = restaurants.shops
             self.shops = shops
@@ -84,22 +69,23 @@ extension ViewController {
     }
     
     private func showResultTableViewController() {
-        let tableViewController = RestaurentResultTableViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tableViewController = storyboard.instantiateViewController(withIdentifier: "ResultTableView") as! RestaurentResultTableViewController
         tableViewController.delegate = self
-        tableViewController.shops = shops
         self.resultTableViewController = tableViewController
         
         let navigationViewController = UINavigationController(rootViewController: tableViewController)
         navigationViewController.navigationBar.prefersLargeTitles = false
-        navigationViewController.title = "近くのレストラン"
+        navigationViewController.isModalInPresentation = true
         
         if let sheet = navigationViewController.sheetPresentationController {
             sheet.detents = [
-                .custom(identifier: .init(rawValue: "small"), resolver: { _ in 44 }),
+                .custom(identifier: .init(rawValue: "small"), resolver: { _ in
+                    tableViewController.calculateDetentHeight()
+                }),
                 .medium(),
                 .large(),
             ]
-            sheet.selectedDetentIdentifier = .medium
             sheet.prefersGrabberVisible = true
             sheet.prefersEdgeAttachedInCompactHeight = true
             sheet.largestUndimmedDetentIdentifier = .large
@@ -107,6 +93,14 @@ extension ViewController {
         }
         
         self.present(navigationViewController, animated: true)
+    }
+    
+    private func loadAndShowRestaurants(with coordinate: CLLocationCoordinate2D) {
+        Task {
+            await loadRestaurants(with: coordinate, range: 3)
+            showAnnotations()
+            resultTableViewController?.updateTableView(with: shops)
+        }
     }
 }
 
@@ -124,15 +118,9 @@ extension ViewController: MKMapViewDelegate {
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-    }
-    
     func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
         if let annotation = annotation as? RestaurantAnnotation {
-            guard let resultTableViewController,
-                  let index = shops.firstIndex(of: annotation.shop)
-            else {
+            guard let resultTableViewController else {
                 return
             }
             
@@ -143,10 +131,7 @@ extension ViewController: MKMapViewDelegate {
                 }
             }
             
-            let indexPath = IndexPath(row: index, section: 0)
-            if let tableView = resultTableViewController.tableView {
-                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-            }
+            resultTableViewController.selectRow(with: annotation.shop)
         }
     }
 }
@@ -157,9 +142,11 @@ extension ViewController: CLLocationManagerDelegate {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
         case .restricted, .denied:
-            break
+            loadAndShowRestaurants(with: mapView.centerCoordinate)
         case .authorizedWhenInUse, .authorizedAlways:
-            break
+            if let coordinate = manager.location?.coordinate {
+                loadAndShowRestaurants(with: coordinate)
+            }
         @unknown default:
             break
         }
@@ -182,6 +169,20 @@ extension ViewController: RestaurantResultTableViewDelegate {
                 mapView.setVisibleMapRect(mapRect, edgePadding: edge, animated: true)
                 
                 mapView.selectAnnotation(annotation, animated: true)
+            }
+        }
+    }
+    
+    func searchButtonDidTap(range: Int) {
+        Task {
+            let coordinate = mapView.centerCoordinate
+            await loadRestaurants(with: coordinate, range: range)
+            showAnnotations()
+            resultTableViewController?.updateTableView(with: shops)
+            if let sheet = resultTableViewController?.sheetPresentationController {
+                sheet.animateChanges {
+                    sheet.selectedDetentIdentifier = .medium
+                }
             }
         }
     }
