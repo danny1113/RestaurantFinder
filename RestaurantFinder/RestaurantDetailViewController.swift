@@ -15,22 +15,18 @@ final class RestaurantDetailViewController: UIViewController {
     var shop: RestaurantResponse.Result.Shop!
     
     var imageCacheManager: ImageCacheManager!
-    
-    private var loadImageTask: Task<Void, Never>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         titleLabel.text = shop.name
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 0
+        titleLabel.sizeToFit()
         
-        loadImageTask = Task {
-            do {
-                let url = shop.logoImage
-                let image = try await imageCacheManager.getImage(for: url)
-                imageView.image = image
-            } catch {
-                print(error)
-            }
+        let url = shop.logoImage
+        imageCacheManager.getImage(for: url) { image in
+            self.imageView.image = image
         }
     }
     
@@ -46,6 +42,6 @@ final class RestaurantDetailViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        loadImageTask?.cancel()
+        imageCacheManager.cancel(for: shop.logoImage)
     }
 }

@@ -10,11 +10,12 @@ import UIKit
 
 @MainActor
 final class ImageCacheManager {
-    private var cachedImages: [URL: UIImage] = [:]
+    private var cachedImages = NSCache<NSURL, UIImage>()
     private var imageTasks: [URL: Task<Void, Never>] = [:]
+    private var loadingResponses: [URL: [(UIImage?) -> Void]] = [:]
     
-    func getImage(for url: URL) async throws -> UIImage? {
-        if let cachedImage = cachedImages[url] {
+    private func getImage(for url: URL) async throws -> UIImage? {
+        if let cachedImage = cachedImages.object(forKey: url as NSURL) {
             return cachedImage
         }
         
@@ -22,19 +23,45 @@ final class ImageCacheManager {
         guard let image = UIImage(data: data) else {
             return nil
         }
-        cachedImages[url] = image
+        cachedImages.setObject(image, forKey: url as NSURL)
         
         return image
     }
     
     func getImage(for url: URL, completionHandler: @escaping (UIImage?) -> Void) {
+        if let cachedImage = cachedImages.object(forKey: url as NSURL) {
+            completionHandler(cachedImage)
+            return
+        }
+        
+        if loadingResponses[url] != nil {
+            loadingResponses[url]?.append(completionHandler)
+            return
+        } else {
+            loadingResponses[url] = [completionHandler]
+        }
+        
         imageTasks[url] = Task {
-            do {
-                let image = try await getImage(for: url)
-                completionHandler(image)
-            } catch {
+            guard let image = try? await getImage(for: url) else {
                 completionHandler(nil)
+                return
             }
+            
+            if Task.isCancelled {
+                return
+            }
+            
+            guard let blocks = loadingResponses[url] else {
+                completionHandler(nil)
+                return
+            }
+            
+            for block in blocks {
+                block(image)
+            }
+            
+            imageTasks[url] = nil
+            loadingResponses[url] = nil
         }
     }
     
@@ -42,5 +69,7 @@ final class ImageCacheManager {
         if let task = imageTasks[url] {
             task.cancel()
         }
+        imageTasks[url] = nil
+        loadingResponses[url] = nil
     }
 }

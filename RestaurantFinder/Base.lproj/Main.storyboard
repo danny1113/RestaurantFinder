@@ -96,6 +96,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="rtA-Nd-OaR" id="QbG-9j-dBr"/>
                                     <outlet property="delegate" destination="rtA-Nd-OaR" id="XwK-z2-R5g"/>
+                                    <outlet property="prefetchDataSource" destination="rtA-Nd-OaR" id="y2A-Mq-zIu"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9q-hb-XL8">
