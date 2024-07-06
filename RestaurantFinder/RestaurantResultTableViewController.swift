@@ -91,6 +91,7 @@ extension RestaurantResultTableViewController: UITableViewDelegate, UITableViewD
             let size = CGSize(width: 60, height: 60)
             content.imageProperties.maximumSize = size
             content.imageProperties.reservedLayoutSize = size
+            content.imageProperties.cornerRadius = 8
             cell.contentConfiguration = content
         }
         
