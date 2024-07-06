@@ -11,6 +11,13 @@ final class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var subtitleLabel: UILabel!
+    
+    @IBOutlet private var addressStackView: UIStackView!
+    @IBOutlet private var addressLabel: UILabel!
+    
+    @IBOutlet private var accessStackView: UIStackView!
+    @IBOutlet private var accessLabel: UILabel!
     
     var shop: RestaurantResponse.Result.Shop!
     
@@ -23,6 +30,25 @@ final class RestaurantDetailViewController: UIViewController {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
         titleLabel.sizeToFit()
+        
+        subtitleLabel.text = shop.nameKana
+        subtitleLabel.lineBreakMode = .byWordWrapping
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.sizeToFit()
+        
+        addressStackView.layer.cornerRadius = 8
+        
+        addressLabel.text = shop.address
+        addressLabel.lineBreakMode = .byWordWrapping
+        addressLabel.numberOfLines = 0
+        addressLabel.sizeToFit()
+        
+        accessStackView.layer.cornerRadius = 8
+        
+        accessLabel.text = shop.access
+        accessLabel.lineBreakMode = .byWordWrapping
+        accessLabel.numberOfLines = 0
+        accessLabel.sizeToFit()
         
         let url = shop.logoImage
         imageCacheManager.getImage(for: url) { image in
