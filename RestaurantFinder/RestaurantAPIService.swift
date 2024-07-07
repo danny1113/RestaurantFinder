@@ -18,9 +18,9 @@ struct RestaurantAPIService {
         url.append(queryItems: [
             URLQueryItem(name: "format", value: "json"),
             URLQueryItem(name: "key", value: Secrets.apiKey),
-            URLQueryItem(name: "lat", value: "\(coordinate.latitude)"),
-            URLQueryItem(name: "lng", value: "\(coordinate.longitude)"),
-            URLQueryItem(name: "range", value: "\(range)"),
+            URLQueryItem(name: "lat", value: String(coordinate.latitude)),
+            URLQueryItem(name: "lng", value: String(coordinate.longitude)),
+            URLQueryItem(name: "range", value: String(range)),
             URLQueryItem(name: "count", value: "100"),
         ])
         
