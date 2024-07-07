@@ -137,7 +137,6 @@ extension RestaurantResultTableViewController: UISearchBarDelegate {
                 shop.name.contains(searchText)
             }
         }
-        print(filteredShops)
         tableView.reloadData()
     }
 }
@@ -184,7 +183,6 @@ extension RestaurantResultTableViewController {
         if detailViewController?.presentingViewController == nil {
             self.present(detailViewController!, animated: true)
         }
-        //navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func setSelectedDetent(_ identifier: UISheetPresentationController.Detent.Identifier) {
