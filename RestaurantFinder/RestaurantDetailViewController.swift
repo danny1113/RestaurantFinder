@@ -25,49 +25,55 @@ final class RestaurantDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        titleLabel.text = shop.name
+        
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
-        titleLabel.sizeToFit()
         
-        subtitleLabel.text = shop.nameKana
         subtitleLabel.lineBreakMode = .byWordWrapping
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.sizeToFit()
         
         addressStackView.layer.cornerRadius = 8
         
-        addressLabel.text = shop.address
         addressLabel.lineBreakMode = .byWordWrapping
         addressLabel.numberOfLines = 0
-        addressLabel.sizeToFit()
         
         accessStackView.layer.cornerRadius = 8
         
-        accessLabel.text = shop.access
         accessLabel.lineBreakMode = .byWordWrapping
         accessLabel.numberOfLines = 0
-        accessLabel.sizeToFit()
         
-        let url = shop.logoImage
-        imageCacheManager.getImage(for: url) { image in
-            self.imageView.image = image
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        configure(with: shop)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         imageCacheManager.cancel(for: shop.logoImage)
+    }
+    
+    @IBAction private func closeButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+}
+
+extension RestaurantDetailViewController {
+    func configure(with shop: RestaurantResponse.Result.Shop) {
+        titleLabel.text = shop.name
+        titleLabel.sizeToFit()
+        
+        subtitleLabel.text = shop.nameKana
+        subtitleLabel.sizeToFit()
+        
+        addressLabel.text = shop.address
+        addressLabel.sizeToFit()
+        
+        accessLabel.text = shop.access
+        accessLabel.sizeToFit()
+        
+        imageView.image = nil
+        
+        let url = shop.logoImage
+        imageCacheManager.getImage(for: url) { image in
+            self.imageView.image = image
+        }
     }
 }

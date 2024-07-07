@@ -185,12 +185,12 @@
         <scene sceneID="mFj-wv-VfW">
             <objects>
                 <viewController storyboardIdentifier="DetailView" id="O8G-4i-gec" customClass="RestaurantDetailViewController" customModule="RestaurantFinder" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="KxB-M9-PIH">
+                    <view key="view" contentMode="scaleToFill" id="KxB-M9-PIH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="89F-wA-fLq">
-                                <rect key="frame" x="16" y="59" width="361" height="101"/>
+                                <rect key="frame" x="16" y="125.33333333333331" width="361" height="101"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MzM-xa-QHA">
                                         <rect key="frame" x="0.0" y="0.0" width="101" height="101"/>
@@ -222,11 +222,11 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="MzM-xa-QHA" firstAttribute="width" secondItem="f3V-JO-gYo" secondAttribute="width" multiplier="0.4" id="oko-zG-YTv"/>
+                                    <constraint firstItem="MzM-xa-QHA" firstAttribute="width" relation="lessThanOrEqual" secondItem="f3V-JO-gYo" secondAttribute="width" multiplier="0.4" id="oko-zG-YTv"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5tR-bG-8BW">
-                                <rect key="frame" x="16" y="176" width="79.666666666666671" height="64.666666666666686"/>
+                                <rect key="frame" x="16" y="242.33333333333334" width="361" height="64.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アドレス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyK-eK-Ex8">
                                         <rect key="frame" x="7.9999999999999964" y="7.9999999999999982" width="63.666666666666657" height="20.333333333333329"/>
@@ -245,7 +245,7 @@
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="djP-Tc-IOC">
-                                <rect key="frame" x="16" y="256.66666666666669" width="79.666666666666671" height="64.666666666666686"/>
+                                <rect key="frame" x="16" y="323" width="361" height="64.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アクセス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OS5-Ng-W2K">
                                         <rect key="frame" x="7.9999999999999964" y="7.9999999999999982" width="63.666666666666657" height="20.333333333333329"/>
@@ -263,19 +263,37 @@
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-h5-Z5b">
+                                <rect key="frame" x="327.33333333333331" y="75" width="49.666666666666686" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
+                                        <hierarchicalColors>
+                                            <color systemColor="labelColor"/>
+                                            <color systemColor="secondaryLabelColor"/>
+                                            <color systemColor="tertiaryLabelColor"/>
+                                        </hierarchicalColors>
+                                    </imageReference>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="O8G-4i-gec" eventType="touchUpInside" id="mGh-hl-jfj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WET-qf-Ptu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="89F-wA-fLq" firstAttribute="top" secondItem="WET-qf-Ptu" secondAttribute="top" id="6XT-2P-hTz"/>
+                            <constraint firstItem="89F-wA-fLq" firstAttribute="top" secondItem="QzR-h5-Z5b" secondAttribute="bottom" constant="16" id="6XT-2P-hTz"/>
                             <constraint firstItem="WET-qf-Ptu" firstAttribute="trailing" secondItem="djP-Tc-IOC" secondAttribute="trailing" constant="16" id="G6O-tn-YwI"/>
                             <constraint firstItem="djP-Tc-IOC" firstAttribute="top" secondItem="5tR-bG-8BW" secondAttribute="bottom" constant="16" id="JQ7-kl-uuj"/>
                             <constraint firstItem="5tR-bG-8BW" firstAttribute="top" secondItem="89F-wA-fLq" secondAttribute="bottom" constant="16" id="aY9-Zg-x1v"/>
+                            <constraint firstItem="WET-qf-Ptu" firstAttribute="trailing" secondItem="QzR-h5-Z5b" secondAttribute="trailing" constant="16" id="fiZ-Ga-cJt"/>
                             <constraint firstItem="89F-wA-fLq" firstAttribute="leading" secondItem="WET-qf-Ptu" secondAttribute="leading" constant="16" id="iBN-Ql-VJB"/>
                             <constraint firstItem="WET-qf-Ptu" firstAttribute="trailing" secondItem="89F-wA-fLq" secondAttribute="trailing" constant="16" id="ib5-OT-YXs"/>
                             <constraint firstItem="WET-qf-Ptu" firstAttribute="trailing" secondItem="5tR-bG-8BW" secondAttribute="trailing" constant="16" id="miL-bh-g0U"/>
                             <constraint firstItem="djP-Tc-IOC" firstAttribute="leading" secondItem="WET-qf-Ptu" secondAttribute="leading" constant="16" id="ogv-bI-5ms"/>
                             <constraint firstItem="5tR-bG-8BW" firstAttribute="leading" secondItem="WET-qf-Ptu" secondAttribute="leading" constant="16" id="rAf-s2-KhV"/>
+                            <constraint firstItem="QzR-h5-Z5b" firstAttribute="top" secondItem="WET-qf-Ptu" secondAttribute="top" constant="16" id="yhh-71-WP2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -296,6 +314,10 @@
     <resources>
         <image name="location.fill" catalog="system" width="128" height="119"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -304,6 +326,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

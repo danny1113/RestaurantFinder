@@ -106,11 +106,8 @@ extension ViewController {
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        if animated == false,
-           let sheet = resultTableViewController?.sheetPresentationController {
-            sheet.animateChanges {
-                sheet.selectedDetentIdentifier = .init(rawValue: "small")
-            }
+        if animated == false {
+            resultTableViewController?.setSelectedDetent(.init(rawValue: "small"))
         }
         
         for annotation in mapView.selectedAnnotations {
@@ -125,13 +122,13 @@ extension ViewController: MKMapViewDelegate {
             }
             
             if let sheet = resultTableViewController.sheetPresentationController,
-               sheet.selectedDetentIdentifier == .init(rawValue: "small") {
+               sheet.selectedDetentIdentifier != .large {
                 sheet.animateChanges {
                     sheet.selectedDetentIdentifier = .medium
                 }
             }
             
-            resultTableViewController.selectRow(with: annotation.shop)
+            resultTableViewController.pushDetailView(with: annotation.shop)
         }
     }
 }

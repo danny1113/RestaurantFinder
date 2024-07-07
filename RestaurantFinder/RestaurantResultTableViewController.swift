@@ -22,6 +22,8 @@ final class RestaurantResultTableViewController: UIViewController {
     
     weak var delegate: RestaurantResultTableViewDelegate?
     
+    private var detailViewController: RestaurantDetailViewController?
+    
     private var shops: [RestaurantResponse.Result.Shop] = []
     private(set) var filteredShops: [RestaurantResponse.Result.Shop] = []
     
@@ -40,14 +42,10 @@ final class RestaurantResultTableViewController: UIViewController {
     
     @IBAction private func searchButtonTapped() {
         Task {
-            searchButton.isHidden = true
-            activityIndicator.startAnimating()
-            
+            startAnimating()
             let range = Int(searchRadiusSlider.value)
             await delegate?.searchButtonDidTap(range: range)
-            
-            activityIndicator.stopAnimating()
-            searchButton.isHidden = false
+            stopAnimating()
         }
     }
     
@@ -154,11 +152,52 @@ extension RestaurantResultTableViewController {
     }
     
     func pushDetailView(with shop: RestaurantResponse.Result.Shop) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController
-        detailViewController.shop = shop
-        detailViewController.imageCacheManager = imageCacheManager
-        navigationController?.pushViewController(detailViewController, animated: true)
+        if detailViewController == nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController
+            detailViewController.shop = shop
+            detailViewController.imageCacheManager = imageCacheManager
+            self.detailViewController = detailViewController
+        } else {
+            detailViewController?.configure(with: shop)
+        }
+        
+        if let sheet = detailViewController?.sheetPresentationController {
+            let currentSelectedDetent = self.sheetPresentationController?.selectedDetentIdentifier
+            var detents: [UISheetPresentationController.Detent] = [.large()]
+            if currentSelectedDetent != .large {
+                detents.append(.medium())
+                detents.append(.custom(identifier: .init(rawValue: "small"), resolver: { [weak self] _ in
+                    return self?.calculateDetentHeight()
+                }))
+            }
+            sheet.detents = detents
+            sheet.prefersGrabberVisible = true
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.largestUndimmedDetentIdentifier = .large
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = currentSelectedDetent ?? .medium
+            }
+        }
+        
+        if detailViewController?.presentingViewController == nil {
+            self.present(detailViewController!, animated: true)
+        }
+        //navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func setSelectedDetent(_ identifier: UISheetPresentationController.Detent.Identifier) {
+        if let sheet = sheetPresentationController {
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = identifier
+            }
+        }
+        if let sheet = detailViewController?.sheetPresentationController {
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = identifier
+            }
+        }
     }
     
     func updateShops(_ shops: [RestaurantResponse.Result.Shop]) {
@@ -177,6 +216,16 @@ extension RestaurantResultTableViewController {
         }
         let indexPath = IndexPath(row: index, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+    }
+    
+    func startAnimating() {
+        searchButton.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    func stopAnimating() {
+        searchButton.isHidden = false
+        activityIndicator.stopAnimating()
     }
 }
 
