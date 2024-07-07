@@ -21,7 +21,7 @@ struct RestaurantAPIService {
             URLQueryItem(name: "lat", value: String(coordinate.latitude)),
             URLQueryItem(name: "lng", value: String(coordinate.longitude)),
             URLQueryItem(name: "range", value: String(range)),
-            URLQueryItem(name: "count", value: "100"),
+            URLQueryItem(name: "count", value: "50"),
         ])
         
         let (data, _) = try await URLSession.shared.data(from: url)
