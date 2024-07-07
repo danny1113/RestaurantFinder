@@ -100,7 +100,7 @@ extension RestaurantResultTableViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shop = filteredShops[indexPath.row]
         delegate?.didSelect(shop: shop)
-        pushDetailView(with: shop)
+        presentDetailView(with: shop)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -151,7 +151,7 @@ extension RestaurantResultTableViewController {
         return headerView.frame.height + searchBar.frame.height
     }
     
-    func pushDetailView(with shop: RestaurantResponse.Result.Shop) {
+    func presentDetailView(with shop: RestaurantResponse.Result.Shop) {
         if detailViewController == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailView") as! RestaurantDetailViewController

@@ -144,7 +144,7 @@ extension ViewController: MKMapViewDelegate {
                 }
             }
             
-            resultTableViewController.pushDetailView(with: annotation.shop)
+            resultTableViewController.presentDetailView(with: annotation.shop)
         }
     }
 }
