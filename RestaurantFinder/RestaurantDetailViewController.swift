@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// レストランの詳しい情報
 final class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet private var imageView: UIImageView!

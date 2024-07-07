@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+/// レストランの位置をを表示する地図
 final class ViewController: UIViewController {
     
     static let annotationIdentifier = "restaurant"

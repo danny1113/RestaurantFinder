@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 
+/// レストランを表示するリスト
 final class RestaurantResultTableViewController: UIViewController {
     
     static let identifier = "cell"
