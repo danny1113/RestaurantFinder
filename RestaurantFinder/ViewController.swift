@@ -80,7 +80,7 @@ extension ViewController {
         
         if let sheet = navigationViewController.sheetPresentationController {
             sheet.detents = [
-                .custom(identifier: .init(rawValue: "small"), resolver: { _ in
+                .custom(identifier: .small, resolver: { _ in
                     tableViewController.calculateDetentHeight()
                 }),
                 .medium(),
@@ -107,7 +107,7 @@ extension ViewController {
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         if animated == false {
-            resultTableViewController?.setSelectedDetent(.init(rawValue: "small"))
+            resultTableViewController?.setSelectedDetent(.small)
         }
         
         for annotation in mapView.selectedAnnotations {

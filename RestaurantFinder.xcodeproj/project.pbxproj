@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301E32B22C3A63810073EBF4 /* UISheetPresentationController+SmallDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301E32B12C3A63810073EBF4 /* UISheetPresentationController+SmallDetent.swift */; };
 		30E4E2A82C354249006E62F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2A72C354249006E62F0 /* AppDelegate.swift */; };
 		30E4E2AA2C354249006E62F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2A92C354249006E62F0 /* SceneDelegate.swift */; };
 		30E4E2AC2C354249006E62F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4E2AB2C354249006E62F0 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		301E32B12C3A63810073EBF4 /* UISheetPresentationController+SmallDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISheetPresentationController+SmallDetent.swift"; sourceTree = "<group>"; };
 		30E4E2A42C354249006E62F0 /* RestaurantFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E4E2A72C354249006E62F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30E4E2A92C354249006E62F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				30E4E2D72C3544AE006E62F0 /* RestaurantAPIService.swift */,
 				30E4E2D92C354A97006E62F0 /* RestaurantResponse.swift */,
 				30E4E2E32C35AC69006E62F0 /* ImageCacheManager.swift */,
+				301E32B12C3A63810073EBF4 /* UISheetPresentationController+SmallDetent.swift */,
 				30E4E2AD2C354249006E62F0 /* Main.storyboard */,
 				30E4E2B02C35424A006E62F0 /* Assets.xcassets */,
 				30E4E2B22C35424A006E62F0 /* LaunchScreen.storyboard */,
@@ -282,6 +285,7 @@
 				30E4E2AC2C354249006E62F0 /* ViewController.swift in Sources */,
 				30E4E2D82C3544AE006E62F0 /* RestaurantAPIService.swift in Sources */,
 				30E4E2E42C35AC69006E62F0 /* ImageCacheManager.swift in Sources */,
+				301E32B22C3A63810073EBF4 /* UISheetPresentationController+SmallDetent.swift in Sources */,
 				30E4E2DE2C3556DE006E62F0 /* RestaurantResultTableViewCell.swift in Sources */,
 				30E4E2DA2C354A97006E62F0 /* RestaurantResponse.swift in Sources */,
 				30E4E2DC2C3552FB006E62F0 /* RestaurantResultTableViewController.swift in Sources */,

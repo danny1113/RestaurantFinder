@@ -167,7 +167,7 @@ extension RestaurantResultTableViewController {
             var detents: [UISheetPresentationController.Detent] = [.large()]
             if currentSelectedDetent != .large {
                 detents.append(.medium())
-                detents.append(.custom(identifier: .init(rawValue: "small"), resolver: { [weak self] _ in
+                detents.append(.custom(identifier: .small, resolver: { [weak self] _ in
                     return self?.calculateDetentHeight()
                 }))
             }
