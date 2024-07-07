@@ -190,7 +190,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="89F-wA-fLq">
-                                <rect key="frame" x="16" y="125.33333333333331" width="361" height="101"/>
+                                <rect key="frame" x="16" y="131.33333333333334" width="361" height="101"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MzM-xa-QHA">
                                         <rect key="frame" x="0.0" y="0.0" width="101" height="101"/>
@@ -213,7 +213,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5d-Es-7V9">
-                                                <rect key="frame" x="0.0" y="30.333333333333329" width="41.333333333333336" height="20.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="30.333333333333314" width="41.333333333333336" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -226,10 +226,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5tR-bG-8BW">
-                                <rect key="frame" x="16" y="242.33333333333334" width="361" height="64.666666666666657"/>
+                                <rect key="frame" x="16" y="248.33333333333334" width="361" height="64.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アドレス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyK-eK-Ex8">
-                                        <rect key="frame" x="7.9999999999999964" y="7.9999999999999982" width="63.666666666666657" height="20.333333333333329"/>
+                                        <rect key="frame" x="7.9999999999999964" y="7.9999999999999698" width="63.666666666666657" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -245,7 +245,7 @@
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="djP-Tc-IOC">
-                                <rect key="frame" x="16" y="323" width="361" height="64.666666666666686"/>
+                                <rect key="frame" x="16" y="329" width="361" height="64.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アクセス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OS5-Ng-W2K">
                                         <rect key="frame" x="7.9999999999999964" y="7.9999999999999982" width="63.666666666666657" height="20.333333333333329"/>
@@ -264,7 +264,7 @@
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-h5-Z5b">
-                                <rect key="frame" x="327.33333333333331" y="75" width="49.666666666666686" height="34.333333333333343"/>
+                                <rect key="frame" x="320.33333333333331" y="75" width="56.666666666666686" height="40.333333333333343"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
@@ -274,6 +274,9 @@
                                             <color systemColor="tertiaryLabelColor"/>
                                         </hierarchicalColors>
                                     </imageReference>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font" scale="large" weight="regular">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="closeButtonTapped:" destination="O8G-4i-gec" eventType="touchUpInside" id="mGh-hl-jfj"/>
