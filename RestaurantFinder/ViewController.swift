@@ -42,7 +42,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func locationButtonTapped() {
         guard let coordinate = locationManager.location?.coordinate else {
-            print("can't not get location coordinate")
+            self.present(error: "位置情報を取得できませんでした")
             return
         }
         mapView.setCenter(coordinate, animated: true)
@@ -50,6 +50,21 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController {
+    private func present(alertController: UIAlertController) {
+        if let presentedViewController = presentedViewController {
+            presentedViewController.present(alertController, animated: true)
+        } else {
+            self.present(alertController, animated: true)
+        }
+    }
+    
+    private func present(error: String) {
+        let alert = UIAlertController(title: "エラー", message: error, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        self.present(alertController: alert)
+    }
+    
     private func loadRestaurants(with coordinate: CLLocationCoordinate2D, range: Int) async {
         do {
             let restaurants = try await RestaurantAPIService.getNearbyRestaurants(
@@ -59,7 +74,7 @@ extension ViewController {
             let shops = restaurants.shops
             self.shops = shops
         } catch {
-            print(error)
+            self.present(error: "レストラン情報を取得できませんでした")
         }
     }
     
